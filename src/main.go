@@ -31,6 +31,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"math"
 	"net/http"
 	"strconv"
 
@@ -148,7 +149,9 @@ func main() {
 	fmt.Println(report.stats)
 
 	data, _ := yaml.Marshal(&report.stats)
+
 	fmt.Println(string(data))
+
 	err = ioutil.WriteFile("report.yaml", data, 0644)
 
 	if err != nil {
@@ -163,7 +166,7 @@ func calculateReport(candleStatsList []CandleStats) AnalysisReport {
 	var values []float64 = []float64{}
 
 	for _, v := range candleStatsList {
-		values = append(values, v.returnPercentage)
+		values = append(values, math.Abs(v.returnPercentage))
 	}
 
 	var returnPercentageStats Stats = Stats{}
