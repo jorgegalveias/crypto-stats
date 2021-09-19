@@ -35,7 +35,10 @@ import (
 	"net/http"
 	"strconv"
 
+	"os"
+
 	"github.com/montanaflynn/stats"
+	"github.com/tomlazar/table"
 	"gopkg.in/yaml.v3"
 )
 
@@ -159,6 +162,22 @@ func main() {
 		log.Fatal(err)
 	}
 
+	outputTable := buildTable(report.stats)
+	err = outputTable.WriteTable(os.Stdout, nil)
+}
+
+func buildTable(stats map[string]Stats) *table.Table {
+
+	var statsTable table.Table = table.Table{}
+
+	statsTable.Headers = []string{"KPI Name", "Standard Deviation", "Mean", "Value At Risk"}
+	statsTable.Rows = [][]string{}
+	for _, v := range stats {
+		row := []string{v.Name, fmt.Sprintf("%.2f", v.Std*100), fmt.Sprintf("%.2f", v.Mean*100), fmt.Sprintf("%.2f", v.ValueAtRisk*100)}
+		statsTable.Rows = append(statsTable.Rows, row)
+	}
+
+	return &statsTable
 }
 
 func calculateReport(candleStatsList []CandleStats) AnalysisReport {
@@ -181,7 +200,6 @@ func calculateReport(candleStatsList []CandleStats) AnalysisReport {
 		candleStatsList: candleStatsList,
 		stats:           map[string]Stats{"return_percentage": returnPercentageStats},
 	}
-
 	return report
 
 }
