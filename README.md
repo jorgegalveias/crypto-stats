@@ -1,16 +1,12 @@
 # crypto-stats
 
-## Crypto Stats for Free
+## KPIs Per Asset
 
-### Daily Return Percentage
-Recorded on 19/09/2021  
+* Data Source: Binance
+* TimeFrame: Daily
 
+1. SHIBUSDT
 
 ![output](output/crypto-stats-output.PNG)
 
-
-| Asset    | Mean  | Std     | Value At Risk |
-|----------|-------|---------|---------------|
-| SHIBUSDT | 7,1 % | 13,9 %  | 40,2 %        |
-|          |       |         |               |
-|          |       |         |               |
+**Recorded on 19/09/2021**  
