@@ -7,6 +7,6 @@
 
 1. SHIBUSDT
 
-![output](output/crypto-stats-output.png)
+![output](output/crypto-stats-output.PNG)
 
 **Recorded on 19/09/2021**  
