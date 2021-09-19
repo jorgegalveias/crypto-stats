@@ -160,7 +160,7 @@ func buildTable(stats map[string]Stats) *table.Table {
 
 	var statsTable table.Table = table.Table{}
 
-	statsTable.Headers = []string{"KPI Name", "Standard Deviation", "Mean", "Value At Risk"}
+	statsTable.Headers = []string{"Candle Feature Name", "Standard Deviation", "Mean", "Value At Risk"}
 	statsTable.Rows = [][]string{}
 	for _, v := range stats {
 		row := []string{v.Name, fmt.Sprintf("%.2f", v.Std*100), fmt.Sprintf("%.2f", v.Mean*100), fmt.Sprintf("%.2f", v.ValueAtRisk*100)}
