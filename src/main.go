@@ -71,16 +71,6 @@ func (candleType *CandleType) calculateCandleType(openPrice float64, closePrice 
 	}
 }
 
-type BaseStatsCalculator struct{}
-
-func (statsCalculator *BaseStatsCalculator) calculateStd(values []float64) float64 {
-	return 0.0
-}
-
-type StatsCalculator interface {
-	calculateValue(candle *Candle) float64
-}
-
 type Stats struct {
 	Name        string
 	Std         float64
