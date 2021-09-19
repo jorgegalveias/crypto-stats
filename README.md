@@ -2,8 +2,8 @@
 
 ## KPIs Per Asset
 
-* *Data Source* : Binance
-* *TimeFrame* : Daily
+* **Data Source** : Binance
+* **TimeFrame** : Daily
 
 1. SHIBUSDT
 
