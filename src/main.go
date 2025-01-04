@@ -42,11 +42,15 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-/*var (
+/*
+var (
+
 	apiKey    = "your api key"
 	secretKey = "your secret key"
-)*/
-const currencyPair = "SHIBUSDT"
+
+)
+*/
+const currencyPair = "BTCUSDT"
 const binanceURL = "https://api.binance.com/api/v3/klines?symbol=" + currencyPair + "&interval=1d&limit=1000"
 
 // Kline define kline info
@@ -152,18 +156,18 @@ func main() {
 		log.Fatal(err)
 	}
 
-	outputTable := buildTable(report.stats)
+	outputTable := buildTable(report.currencyPair, report.stats)
 	err = outputTable.WriteTable(os.Stdout, nil)
 }
 
-func buildTable(stats map[string]Stats) *table.Table {
+func buildTable(securityName string, stats map[string]Stats) *table.Table {
 
 	var statsTable table.Table = table.Table{}
 
-	statsTable.Headers = []string{"Candle Feature Name", "Standard Deviation", "Mean", "Value At Risk"}
+	statsTable.Headers = []string{"Security","Candle Feature Name", "Standard Deviation", "Mean", "Value At Risk"}
 	statsTable.Rows = [][]string{}
 	for _, v := range stats {
-		row := []string{v.Name, fmt.Sprintf("%.2f", v.Std*100), fmt.Sprintf("%.2f", v.Mean*100), fmt.Sprintf("%.2f", v.ValueAtRisk*100)}
+		row := []string{securityName, v.Name, fmt.Sprintf("%.2f", v.Std*100), fmt.Sprintf("%.2f", v.Mean*100), fmt.Sprintf("%.2f", v.ValueAtRisk*100)}
 		statsTable.Rows = append(statsTable.Rows, row)
 	}
 
